@@ -89,9 +89,6 @@ class TestReceipt(unittest.TestCase):
         with self.assertRaises(TypeError):
             receipt.tax_system_code = 'invalid type'
 
-        with self.assertRaises(ValueError):
-            receipt.phone = 'invalid phone'
-
         with self.assertRaises(TypeError):
             receipt.items = 'invalid items'
 
