@@ -99,7 +99,7 @@ Configuration.configure_user_agent(
 
 setup(
     name="yandex_checkout",
-    version="1.5.0",
+    version="1.5.1",
     description="Yandex Checkout SDK Python Library",
     long_description=long_description,
     long_description_content_type="text/markdown",

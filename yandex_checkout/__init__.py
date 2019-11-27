@@ -31,4 +31,4 @@ from yandex_checkout.domain.request.webhook_request import WebhookRequest
 from yandex_checkout.domain.response.webhook_response import WebhookResponse, WebhookList
 from yandex_checkout.settings import Settings
 
-__version__ = '1.5.0'
+__version__ = '1.5.1'
