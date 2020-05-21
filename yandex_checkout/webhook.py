@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import uuid
 
-from yandex_checkout.domain.common.http_verb import HttpVerb
-
 from yandex_checkout.client import ApiClient
+from yandex_checkout.domain.common.http_verb import HttpVerb
 from yandex_checkout.domain.request.webhook_request import WebhookRequest
 from yandex_checkout.domain.response.webhook_response import WebhookResponse, WebhookList
 

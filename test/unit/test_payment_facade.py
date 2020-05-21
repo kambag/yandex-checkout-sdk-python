@@ -12,7 +12,7 @@ from yandex_checkout.domain.models.amount import Amount
 from yandex_checkout.domain.models.payment_data.response.payment_data_bank_card import PaymentDataBankCard
 from yandex_checkout.domain.request.capture_payment_request import CapturePaymentRequest
 from yandex_checkout.domain.request.payment_request import PaymentRequest
-from yandex_checkout.domain.response.payment_list_responce import PaymentListResponse
+from yandex_checkout.domain.response.payment_list_response import PaymentListResponse
 from yandex_checkout.domain.response.payment_response import PaymentResponse
 from yandex_checkout.payment import Payment
 

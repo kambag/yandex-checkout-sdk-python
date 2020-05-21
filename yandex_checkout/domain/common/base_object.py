@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
+from decimal import Decimal
 
 
 class BaseObject(object):
@@ -24,9 +26,14 @@ class BaseObject(object):
                 list_value = []
                 for value in prop_value:
                     if isinstance(value, BaseObject):
-                        list_value.append(dict(value)),
+                        list_value.append(dict(value))
                     else:
                         list_value.append(value)
                 yield prop_name, list_value
+            elif isinstance(prop_value, Decimal):
+                yield prop_name, float(prop_value)
             else:
                 yield prop_name, prop_value
+
+    def json(self):
+        return json.dumps(dict(self), default=str)

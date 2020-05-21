@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from yandex_checkout import ReceiptItem
 from yandex_checkout.domain.common.receipt_type import ReceiptType
 from yandex_checkout.domain.common.request_object import RequestObject
 from yandex_checkout.domain.models.receipt_customer import ReceiptCustomer
 from yandex_checkout.domain.models.settlement import Settlement
+from yandex_checkout.domain.request.receipt_item_request import ReceiptItemRequest
 
 
 class ReceiptRequest(RequestObject):
@@ -16,13 +16,15 @@ class ReceiptRequest(RequestObject):
 
     __tax_system_code = None
 
-    __items = None
+    __items = []
 
-    __settlements = None
+    __settlements = []
 
     __payment_id = None
 
     __refund_id = None
+
+    __on_behalf_of = None
 
     @property
     def type(self):
@@ -57,6 +59,26 @@ class ReceiptRequest(RequestObject):
             raise TypeError('Invalid customer value type in receipt_request')
 
     @property
+    def email(self):
+        return self.__customer.email if self.__customer is not None else None
+
+    @email.setter
+    def email(self, value):
+        if self.__customer is None:
+            self.__customer = ReceiptCustomer()
+        self.__customer.email = str(value)
+
+    @property
+    def phone(self):
+        return self.__customer.phone if self.__customer is not None else None
+
+    @phone.setter
+    def phone(self, value):
+        if self.__customer is None:
+            self.__customer = ReceiptCustomer()
+        self.__customer.phone = str(value)
+
+    @property
     def tax_system_code(self):
         return self.__tax_system_code
 
@@ -77,13 +99,14 @@ class ReceiptRequest(RequestObject):
             items = []
             for item in value:
                 if isinstance(item, dict):
-                    items.append(ReceiptItem(item))
-                elif isinstance(item, ReceiptItem):
+                    items.append(ReceiptItemRequest(item))
+                elif isinstance(item, ReceiptItemRequest):
                     items.append(item)
                 else:
                     raise TypeError('Invalid item type in receipt.items')
-
             self.__items = items
+        elif value is None:
+            self.__items = []
         else:
             raise TypeError('Invalid items value type in receipt_request')
 
@@ -102,8 +125,9 @@ class ReceiptRequest(RequestObject):
                     items.append(item)
                 else:
                     raise TypeError('Invalid settlement type in receipt.settlements')
-
             self.__settlements = items
+        elif value is None:
+            self.__settlements = []
         else:
             raise TypeError('Invalid settlements value type in receipt_request')
 
@@ -124,6 +148,14 @@ class ReceiptRequest(RequestObject):
     def refund_id(self, value):
         self.__payment_id = None
         self.__refund_id = str(value)
+
+    @property
+    def on_behalf_of(self):
+        return self.__on_behalf_of
+
+    @on_behalf_of.setter
+    def on_behalf_of(self, value):
+        self.__on_behalf_of = str(value)
 
     def validate(self):
         if self.type is None:

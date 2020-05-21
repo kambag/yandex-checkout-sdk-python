@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from yandex_checkout.domain.common.response_object import ResponseObject
-from yandex_checkout.domain.response.receipt_response import ReceiptResponse
+from yandex_checkout.domain.response.payment_response import PaymentResponse
 
 
-class ReceiptListResponse(ResponseObject):
+class PaymentListResponse(ResponseObject):
     __type = None
+
+    __next_page = None
 
     __items = None
 
@@ -17,12 +19,20 @@ class ReceiptListResponse(ResponseObject):
         self.__type = value
 
     @property
+    def next_page(self):
+        return self.__next_page
+
+    @next_page.setter
+    def next_page(self, value):
+        self.__next_page = value
+
+    @property
     def items(self):
         return self.__items
 
     @items.setter
     def items(self, value):
         if isinstance(value, list):
-            self.__items = [ReceiptResponse(receipt) for receipt in value]
+            self.__items = [PaymentResponse(payment) for payment in value]
         else:
             self.__items = value

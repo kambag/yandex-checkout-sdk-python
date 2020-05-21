@@ -2,6 +2,8 @@
 import sys
 import unittest
 
+from yandex_checkout.configuration import Configuration
+
 if sys.version_info >= (3, 3):
     from unittest.mock import patch
 else:
@@ -14,6 +16,10 @@ from yandex_checkout.refund import Refund
 
 
 class TestRefundFacade(unittest.TestCase):
+
+    def setUp(self):
+        Configuration.configure(account_id='test_account_id', secret_key='test_secret_key')
+
     def test_create_payment_with_dict(self):
         self.maxDiff = None
         refund_facade = Refund()
@@ -57,6 +63,7 @@ class TestRefundFacade(unittest.TestCase):
         self.assertIsInstance(refund.amount, Amount)
 
     def test_create_payment_with_object(self):
+
         self.maxDiff = None
         refund_facade = Refund()
         with patch('yandex_checkout.client.ApiClient.request') as request_mock:

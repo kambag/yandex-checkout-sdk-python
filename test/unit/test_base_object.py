@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import unittest
 
 from yandex_checkout.domain.common.base_object import BaseObject
@@ -87,3 +88,10 @@ class TestBaseObject(unittest.TestCase):
         for item in base_object.base_objects_list:
             self.assertIsInstance(item, MyBaseObject)
         self.assertEqual(self.fixture_args, dict(base_object))
+
+    def test_json(self):
+        base_object = MyBaseObject(**self.fixture_args)
+        my_json = base_object.json()
+
+        self.assertIsInstance(my_json, str)
+        self.assertEqual(dict(base_object), dict(json.loads(my_json)))

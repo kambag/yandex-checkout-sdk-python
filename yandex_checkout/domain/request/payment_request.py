@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-from yandex_checkout.domain.common.payment_method_type import PaymentMethodType
 
+from yandex_checkout.domain.common.payment_method_type import PaymentMethodType
 from yandex_checkout.domain.common.request_object import RequestObject
 from yandex_checkout.domain.models.airline import Airline
 from yandex_checkout.domain.models.amount import Amount
@@ -11,9 +11,11 @@ from yandex_checkout.domain.models.payment_data.payment_data import PaymentData
 from yandex_checkout.domain.models.payment_data.payment_data_factory import PaymentDataFactory
 from yandex_checkout.domain.models.receipt import Receipt
 from yandex_checkout.domain.models.recipient import Recipient
+from yandex_checkout.domain.models.transfer import Transfer
 
 
 class PaymentRequest(RequestObject):
+
     __recipient = None
 
     __amount = None
@@ -39,6 +41,8 @@ class PaymentRequest(RequestObject):
     __airline = None
 
     __metadata = None
+
+    __transfers = []
 
     @property
     def recipient(self):
@@ -89,7 +93,7 @@ class PaymentRequest(RequestObject):
         elif isinstance(value, Receipt):
             self.__receipt = value
         else:
-            raise TypeError('Invalid receipt value type')
+            raise TypeError('Invalid receipt_request value type')
 
     @property
     def payment_token(self):
@@ -101,7 +105,7 @@ class PaymentRequest(RequestObject):
         if cast_value:
             self.__payment_token = cast_value
         else:
-            raise ValueError('Invalid payment_token value')
+            raise TypeError('Invalid payment_token value')
 
     @property
     def payment_method_id(self):
@@ -184,6 +188,19 @@ class PaymentRequest(RequestObject):
     def metadata(self, value):
         if type(value) is dict:
             self.__metadata = value
+
+    @property
+    def transfers(self):
+        return self.__transfers
+
+    @transfers.setter
+    def transfers(self, value):
+        if isinstance(value, list):
+            self.__transfers = [Transfer(item) for item in value]
+        elif value is None:
+            self.__transfers = []
+        else:
+            raise TypeError('Invalid transfers data type in payment_request.transfers')
 
     def validate(self):
         amount = self.amount

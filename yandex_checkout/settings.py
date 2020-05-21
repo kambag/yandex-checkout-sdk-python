@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from yandex_checkout.domain.common.http_verb import HttpVerb
-
 from yandex_checkout.client import ApiClient
+from yandex_checkout.domain.common.http_verb import HttpVerb
 
 
 class Settings:

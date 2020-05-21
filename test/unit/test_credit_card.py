@@ -2,8 +2,8 @@
 import unittest
 
 from yandex_checkout.domain.models.payment_data.card_type import CardType
-from yandex_checkout.domain.models.payment_data.response.credit_card import CreditCard as ResponseCreditCard
 from yandex_checkout.domain.models.payment_data.request.credit_card import CreditCard as RequestCreditCard
+from yandex_checkout.domain.models.payment_data.response.credit_card import CreditCard as ResponseCreditCard
 
 
 class TestCreditCard(unittest.TestCase):
@@ -64,6 +64,3 @@ class TestCreditCard(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             credit_card.expiry_month = 'invalid expiry_month'
-
-        with self.assertRaises(ValueError):
-            credit_card.card_type = 'invalid card_type'

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from decimal import Decimal
+
 from yandex_checkout.domain.common.base_object import BaseObject
 from yandex_checkout.domain.models.amount import Amount
 
@@ -39,11 +41,14 @@ class ReceiptItem(BaseObject):
 
     @property
     def quantity(self):
+        """
+        :return Decimal:
+        """
         return self.__quantity
 
     @quantity.setter
     def quantity(self, value):
-        self.__quantity = float(value)
+        self.__quantity = Decimal(float(value))
 
     @property
     def amount(self):
@@ -108,11 +113,14 @@ class ReceiptItem(BaseObject):
 
     @property
     def excise(self):
+        """
+        :return Decimal:
+        """
         return self.__excise
 
     @excise.setter
     def excise(self, value):
-        self.__excise = float(value)
+        self.__excise = Decimal(float(value))
 
 
 class PaymentMode(object):

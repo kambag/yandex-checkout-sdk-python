@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 from decimal import Decimal
 
-from yandex_checkout.domain.common.response_object import ResponseObject
+from yandex_checkout.domain.common.base_object import BaseObject
 from yandex_checkout.domain.models.amount import Amount
 from yandex_checkout.domain.models.receipt_item_supplier import ReceiptItemSupplier
 
 
-class ReceiptItemResponse(ResponseObject):
+class ReceiptItemRequest(BaseObject):
+    """
+    Class representing receipt item data wrapper object
 
+    Used in Receipt
+    """
     __description = None
 
     __quantity = None
@@ -16,9 +20,17 @@ class ReceiptItemResponse(ResponseObject):
 
     __vat_code = None
 
+    __payment_mode = None
+
     __payment_subject = None
 
-    __payment_mode = None
+    __product_code = None
+
+    __country_of_origin_code = None
+
+    __customs_declaration_number = None
+
+    __excise = None
 
     __supplier = None
 
@@ -30,7 +42,7 @@ class ReceiptItemResponse(ResponseObject):
 
     @description.setter
     def description(self, value):
-        self.__description = value
+        self.__description = str(value)
 
     @property
     def quantity(self):
@@ -49,7 +61,12 @@ class ReceiptItemResponse(ResponseObject):
 
     @amount.setter
     def amount(self, value):
-        self.__amount = Amount(value)
+        if isinstance(value, dict):
+            self.__amount = Amount(value)
+        elif isinstance(value, Amount):
+            self.__amount = value
+        else:
+            raise TypeError('Invalid amount value type')
 
     @property
     def vat_code(self):
@@ -60,6 +77,14 @@ class ReceiptItemResponse(ResponseObject):
         self.__vat_code = int(value)
 
     @property
+    def payment_mode(self):
+        return self.__payment_mode
+
+    @payment_mode.setter
+    def payment_mode(self, value):
+        self.__payment_mode = str(value)
+
+    @property
     def payment_subject(self):
         return self.__payment_subject
 
@@ -68,12 +93,39 @@ class ReceiptItemResponse(ResponseObject):
         self.__payment_subject = str(value)
 
     @property
-    def payment_mode(self):
-        return self.__payment_mode
+    def product_code(self):
+        return self.__product_code
 
-    @payment_mode.setter
-    def payment_mode(self, value):
-        self.__payment_mode = str(value)
+    @product_code.setter
+    def product_code(self, value):
+        self.__product_code = str(value)
+
+    @property
+    def country_of_origin_code(self):
+        return self.__country_of_origin_code
+
+    @country_of_origin_code.setter
+    def country_of_origin_code(self, value):
+        self.__country_of_origin_code = str(value)
+
+    @property
+    def customs_declaration_number(self):
+        return self.__customs_declaration_number
+
+    @customs_declaration_number.setter
+    def customs_declaration_number(self, value):
+        self.__customs_declaration_number = str(value)
+
+    @property
+    def excise(self):
+        """
+        :return Decimal:
+        """
+        return self.__excise
+
+    @excise.setter
+    def excise(self, value):
+        self.__excise = Decimal(float(value))
 
     @property
     def supplier(self):

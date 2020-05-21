@@ -55,7 +55,10 @@ class Configuration(object):
             shop_password=Configuration.secret_key,
             timeout=Configuration.timeout,
             max_attempts=Configuration.max_attempts,
-            auth_token=Configuration.auth_token
+            auth_token=Configuration.auth_token,
+            agent_framework=Configuration.agent_framework,
+            agent_cms=Configuration.agent_cms,
+            agent_module=Configuration.agent_module
         )
 
     @staticmethod
@@ -67,6 +70,6 @@ class Configuration(object):
 
     def assert_has_api_credentials(self):
         if self.auth_token is None and not self.has_api_credentials():
-                raise ConfigurationError("account_id and secret_key are required")
+            raise ConfigurationError("account_id and secret_key are required")
         elif self.auth_token and self.has_api_credentials():
             raise ConfigurationError("Could not configure authorization with auth_token and basic auth")

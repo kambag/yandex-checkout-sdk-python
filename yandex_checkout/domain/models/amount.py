@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from decimal import Decimal
+
 from yandex_checkout.domain.common.base_object import BaseObject
 
 
@@ -12,11 +14,14 @@ class Amount(BaseObject):
 
     @property
     def value(self):
+        """
+        :return Decimal:
+        """
         return self.__value
 
     @value.setter
     def value(self, value):
-        self.__value = float(value)
+        self.__value = Decimal(round(float(value), 2))
 
     @property
     def currency(self):

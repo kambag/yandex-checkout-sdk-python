@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from yandex_checkout.domain.models.airline import Airline
 from yandex_checkout.domain.models.amount import Amount
 from yandex_checkout.domain.models.currency import Currency
 from yandex_checkout.domain.models.receipt import Receipt
+from yandex_checkout.domain.models.transfer import Transfer
 from yandex_checkout.domain.request.capture_payment_request import CapturePaymentRequest
 
 
@@ -31,6 +33,29 @@ class TestCapturePaymentRequest(unittest.TestCase):
             }
         ]})
         request.amount = Amount({'value': 0.1, 'currency': Currency.RUB})
+        request.airline = Airline({
+            "booking_reference": "IIIKRV",
+            "passengers": [
+                {
+                    "first_name": "SERGEI",
+                    "last_name": "IVANOV"
+                }
+            ],
+            "legs": [
+                {
+                    "departure_airport": "LED",
+                    "destination_airport": "AMS",
+                    "departure_date": "2018-06-20"
+                }
+            ]
+        })
+        request.transfers.append(Transfer({
+            'account_id': '79990000000',
+            "amount": {
+                "value": 100.01,
+                "currency": Currency.RUB
+            }
+        }))
 
         self.assertEqual(
             {
@@ -60,7 +85,32 @@ class TestCapturePaymentRequest(unittest.TestCase):
                         }
                     ],
                     'tax_system_code': 1,
-                }
+                },
+                "airline": {
+                    "booking_reference": "IIIKRV",
+                    "passengers": [
+                        {
+                            "first_name": "SERGEI",
+                            "last_name": "IVANOV"
+                        }
+                    ],
+                    "legs": [
+                        {
+                            "departure_airport": "LED",
+                            "destination_airport": "AMS",
+                            "departure_date": "2018-06-20"
+                        }
+                    ]
+                },
+                'transfers': [
+                    {
+                        'account_id': '79990000000',
+                        "amount": {
+                            "value": 100.01,
+                            "currency": Currency.RUB
+                        }
+                    }
+                ]
             }, dict(request)
         )
 

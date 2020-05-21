@@ -58,5 +58,9 @@ class PaymentRequestBuilder(object):
         self.__request.metadata = value
         return self
 
+    def set_transfers(self, value):
+        self.__request.transfers = value
+        return self
+
     def build(self):
         return self.__request

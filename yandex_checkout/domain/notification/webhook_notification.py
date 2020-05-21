@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from yandex_checkout.domain.response.refund_response import RefundResponse
+from yandex_checkout import WebhookNotificationType, WebhookNotificationEventType
 from yandex_checkout.domain.common.base_object import BaseObject
 from yandex_checkout.domain.response.payment_response import PaymentResponse
+from yandex_checkout.domain.response.refund_response import RefundResponse
 
 
 class WebhookNotification(BaseObject):
+
     __type = None
 
     __event = None
@@ -42,6 +44,7 @@ class WebhookNotification(BaseObject):
 
 
 class RefundWebhookNotification(BaseObject):
+
     __type = None
 
     __event = None
@@ -76,3 +79,38 @@ class RefundWebhookNotification(BaseObject):
             raise ValueError('Parameter object is empty')
         else:
             raise TypeError('Invalid object type')
+
+
+class WebhookNotificationFactory(object):
+    """
+    Base factory class for object that has type property.
+    """
+
+    def create(self, data):
+        """
+        Create instance from value
+
+        :param data: dictionary that has type key
+        :return: Typed object instance
+        """
+        if isinstance(data, dict):
+            if 'type' in data and 'event' in data:
+                return self.__get_instance(data)
+            else:
+                raise ValueError('Parameter "data" should contain "type" and "event" fields')
+        else:
+            raise TypeError('Parameter "data" should be "dict"')
+
+    def __get_instance(self, data):
+        class_object = self.__get_class_object(data)
+        return class_object(data)
+
+    @staticmethod
+    def __get_class_object(data):
+        if data['type'] == WebhookNotificationType.NOTIFICATION:
+            if data['event'] == WebhookNotificationEventType.REFUND_SUCCEEDED:
+                return RefundWebhookNotification
+            else:
+                return WebhookNotification
+        else:
+            raise TypeError('Parameter "data" should contain "type" field')

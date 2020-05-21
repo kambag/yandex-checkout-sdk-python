@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import uuid
 
-from yandex_checkout import PaymentResponse, ReceiptResponse
 from yandex_checkout.client import ApiClient
 from yandex_checkout.domain.common.http_verb import HttpVerb
 from yandex_checkout.domain.request.receipt_request import ReceiptRequest
+from yandex_checkout.domain.response.receipt_response import ReceiptResponse
 from yandex_checkout.domain.response.receipt_list_response import ReceiptListResponse
 
 

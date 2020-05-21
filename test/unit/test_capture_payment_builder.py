@@ -68,4 +68,5 @@ class TestCapturePaymentBuilder(unittest.TestCase):
                     ],
                     'tax_system_code': 1
                 },
+                'transfers': []
             }, dict(request))
