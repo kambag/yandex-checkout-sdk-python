@@ -47,3 +47,4 @@ class CancellationDetailsReasonCode(object):
     ISSUER_UNAVAILABLE = 'issuer_unavailable'
     PAYMENT_METHOD_LIMIT_EXCEEDED = 'payment_method_limit_exceeded'
     PAYMENT_METHOD_RESTRICTED = 'payment_method_restricted'
+    PERMISSION_REVOKED = 'permission_revoked'

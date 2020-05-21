@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from yandex_checkout.domain.models.amount import Amount
-
 from yandex_checkout.domain.common.base_object import BaseObject
-
 from yandex_checkout.domain.common.payment_method_type import PaymentMethodType
-
+from yandex_checkout.domain.models.amount import Amount
 from yandex_checkout.domain.models.payment_data.payment_data import PaymentData
 
 

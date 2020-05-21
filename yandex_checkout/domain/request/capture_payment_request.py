@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
 from yandex_checkout.domain.common.request_object import RequestObject
+from yandex_checkout.domain.models.airline import Airline
 from yandex_checkout.domain.models.amount import Amount
 from yandex_checkout.domain.models.receipt import Receipt
+from yandex_checkout.domain.models.transfer import Transfer
 
 
 class CapturePaymentRequest(RequestObject):
+
     __amount = None
 
     __receipt = None
+
+    __airline = None
+
+    __transfers = []
 
     @property
     def amount(self):
@@ -34,6 +41,32 @@ class CapturePaymentRequest(RequestObject):
             self.__receipt = value
         else:
             raise TypeError('Invalid receipt value type')
+
+    @property
+    def airline(self):
+        return self.__airline
+
+    @airline.setter
+    def airline(self, value):
+        if isinstance(value, dict):
+            self.__airline = Airline(value)
+        elif isinstance(value, Airline):
+            self.__airline = value
+        else:
+            raise TypeError('Invalid airline type')
+
+    @property
+    def transfers(self):
+        return self.__transfers
+
+    @transfers.setter
+    def transfers(self, value):
+        if isinstance(value, list):
+            self.__transfers = [Transfer(item) for item in value]
+        elif value is None:
+            self.__transfers = []
+        else:
+            raise TypeError('Invalid transfers data type in capture_payment_request.transfers')
 
     def validate(self):
         if self.amount:

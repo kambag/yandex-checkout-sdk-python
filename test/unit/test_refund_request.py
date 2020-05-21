@@ -5,10 +5,10 @@ import unittest
 if sys.version_info >= (3, 2):
     from datetime import datetime, timezone, timedelta
 from yandex_checkout.domain.models.payment_data.request.payment_data_bank_card import PaymentDataBankCard
-from yandex_checkout import PaymentRequest
 from yandex_checkout.domain.models.amount import Amount
 from yandex_checkout.domain.models.currency import Currency
 from yandex_checkout.domain.models.receipt import Receipt
+from yandex_checkout.domain.request.payment_request import PaymentRequest
 from yandex_checkout.domain.request.refund_request import RefundRequest
 
 

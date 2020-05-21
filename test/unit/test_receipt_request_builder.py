@@ -8,6 +8,7 @@ from yandex_checkout.domain.request.receipt_request_builder import ReceiptReques
 
 
 class TestReceiptRequestBuilder(unittest.TestCase):
+
     def test_build_object(self):
         self.maxDiff = None
         builder = ReceiptRequestBuilder()
@@ -53,6 +54,8 @@ class TestReceiptRequestBuilder(unittest.TestCase):
             'type': 'payment',
             'send': True,
             'tax_system_code': 1,
+            'email': 'test@email.com',
+            'phone': '79990000000',
             'items': [
                 {
                     'description': 'Product 1',

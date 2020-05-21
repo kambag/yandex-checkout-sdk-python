@@ -8,8 +8,10 @@ from yandex_checkout.domain.request.payment_request_builder import PaymentReques
 
 
 class TestPaymentRequestBuilder(unittest.TestCase):
+
     def test_build_object(self):
         self.maxDiff = None
+        request = None
         builder = PaymentRequestBuilder()
         builder.set_receipt(
                 {'phone': '79990000000', 'email': 'test@email.com', 'tax_system_code': 1, 'items': [
@@ -42,7 +44,16 @@ class TestPaymentRequestBuilder(unittest.TestCase):
             .set_client_ip('192.0.0.0') \
             .set_payment_method_id('123') \
             .set_payment_token('99091209012') \
-            .set_metadata({'key': 'value'})
+            .set_metadata({'key': 'value'}) \
+            .set_transfers([
+                {
+                    'account_id': '79990000000',
+                    "amount": {
+                        "value": 100.01,
+                        "currency": Currency.RUB
+                    }
+                }
+            ])
 
         request = builder.build()
 
@@ -84,5 +95,12 @@ class TestPaymentRequestBuilder(unittest.TestCase):
             'payment_token': '99091209012',
             'confirmation': {'type': ConfirmationType.REDIRECT, 'return_url': 'return.url'},
             'client_ip': '192.0.0.0',
-            'metadata': {'key': 'value'}
+            'metadata': {'key': 'value'},
+            'transfers': [{
+                'account_id': '79990000000',
+                "amount": {
+                    "value": 100.01,
+                    "currency": Currency.RUB
+                }
+            }]
         }, dict(request))

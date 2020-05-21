@@ -2,7 +2,6 @@
 import re
 
 from yandex_checkout.domain.common.base_object import BaseObject
-from yandex_checkout.domain.models.payment_data.card_type import CardType
 
 
 class CreditCard(BaseObject):
@@ -70,7 +69,4 @@ class CreditCard(BaseObject):
 
     @card_type.setter
     def card_type(self, value):
-        if value in CardType.__dict__.values():
-            self.__card_type = value
-        else:
-            raise ValueError('Invalid card_type value')
+        self.__card_type = value

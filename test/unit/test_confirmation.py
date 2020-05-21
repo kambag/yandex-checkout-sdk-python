@@ -4,11 +4,10 @@ import unittest
 from yandex_checkout.domain.common.confirmation_type import ConfirmationType
 from yandex_checkout.domain.models.confirmation.request.confirmation_redirect import \
     ConfirmationRedirect as RequestConfirmationRedirect
-
-from yandex_checkout.domain.models.confirmation.response.confirmation_redirect import \
-    ConfirmationRedirect as ResponseConfirmationRedirect
 from yandex_checkout.domain.models.confirmation.response.confirmation_qr import \
     ConfirmationQr as ResponseConfirmationQr
+from yandex_checkout.domain.models.confirmation.response.confirmation_redirect import \
+    ConfirmationRedirect as ResponseConfirmationRedirect
 
 
 class TestConfirmation(unittest.TestCase):

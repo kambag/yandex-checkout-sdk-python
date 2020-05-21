@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+import re
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
 long_description = """
 # Yandex.Checkout API Python Client Library
@@ -97,20 +98,19 @@ Configuration.configure_user_agent(
 3. Call the required API method. [More details in our documentation for the Yandex.Checkout API](url)
 """
 
+
+with open('yandex_checkout/__init__.py') as fp:
+    version = re.search(r"__version__\s*=\s*'(.*)'", fp.read()).group(1)
+
 setup(
-    name="yandex_checkout",
-    version="1.5.1",
+    name="yandex-checkout",
+    version=version,
     description="Yandex Checkout SDK Python Library",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/yandex-money/yandex-checkout-sdk-python",
     author="Yandex.Money",
-    packages=["yandex_checkout", "yandex_checkout.domain.request", "yandex_checkout.domain.response",
-              "yandex_checkout.domain.notification", "yandex_checkout.domain.models", "yandex_checkout.domain",
-              "yandex_checkout.domain.models.confirmation", "yandex_checkout.domain.models.confirmation.request",
-              "yandex_checkout.domain.models.confirmation.response", "yandex_checkout.domain.models.payment_data",
-              "yandex_checkout.domain.models.payment_data.request", "yandex_checkout.domain.common",
-              "yandex_checkout.domain.models.payment_data.response", "yandex_checkout.domain.exceptions"],
+    packages=find_packages('.', ['test']),
     install_requires=["requests", "uuid", "urllib3", 'distro'],
     zip_safe=False,
     license="MIT",
@@ -120,6 +120,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7"
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8"
     ]
 )

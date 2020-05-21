@@ -4,7 +4,7 @@ from requests.adapters import HTTPAdapter
 from requests.auth import _basic_auth_str
 from urllib3 import Retry
 
-from yandex_checkout.configuration import Configuration
+from yandex_checkout import Configuration
 from yandex_checkout.domain.common.request_object import RequestObject
 from yandex_checkout.domain.common.user_agent import UserAgent
 from yandex_checkout.domain.exceptions.api_error import ApiError

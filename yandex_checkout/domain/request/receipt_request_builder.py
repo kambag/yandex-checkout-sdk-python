@@ -38,5 +38,9 @@ class ReceiptRequestBuilder(object):
         self.__request.refund_id = value
         return self
 
+    def set_on_behalf_of(self, value):
+        self.__request.on_behalf_of = value
+        return self
+
     def build(self):
         return self.__request

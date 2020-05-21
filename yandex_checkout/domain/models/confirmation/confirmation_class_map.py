@@ -5,18 +5,18 @@ from yandex_checkout.domain.models.confirmation.request.confirmation_embedded im
     ConfirmationEmbedded as RequestConfirmationEmbedded
 from yandex_checkout.domain.models.confirmation.request.confirmation_external import \
     ConfirmationExternal as RequestConfirmationExternal
-from yandex_checkout.domain.models.confirmation.request.confirmation_redirect import \
-    ConfirmationRedirect as RequestConfirmationRedirect
 from yandex_checkout.domain.models.confirmation.request.confirmation_qr import \
     ConfirmationQr as RequestConfirmationQr
+from yandex_checkout.domain.models.confirmation.request.confirmation_redirect import \
+    ConfirmationRedirect as RequestConfirmationRedirect
 from yandex_checkout.domain.models.confirmation.response.confirmation_embedded import \
     ConfirmationEmbedded as ResponseConfirmationEmbedded
 from yandex_checkout.domain.models.confirmation.response.confirmation_external import \
     ConfirmationExternal as ResponseConfirmationExternal
-from yandex_checkout.domain.models.confirmation.response.confirmation_redirect import \
-    ConfirmationRedirect as ResponseConfirmationRedirect
 from yandex_checkout.domain.models.confirmation.response.confirmation_qr import \
     ConfirmationQr as ResponseConfirmationQr
+from yandex_checkout.domain.models.confirmation.response.confirmation_redirect import \
+    ConfirmationRedirect as ResponseConfirmationRedirect
 
 
 class ConfirmationClassMap(DataContext):

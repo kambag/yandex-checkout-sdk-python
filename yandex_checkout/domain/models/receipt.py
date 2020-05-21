@@ -10,7 +10,7 @@ class Receipt(BaseObject):
     """
     __customer = None
 
-    __items = None
+    __items = []
 
     __tax_system_code = None
 
@@ -44,6 +44,8 @@ class Receipt(BaseObject):
                     raise TypeError('Invalid item type in receipt.items')
 
             self.__items = items
+        elif value is None:
+            self.__items = []
         else:
             raise TypeError('Invalid items value type in receipt')
 

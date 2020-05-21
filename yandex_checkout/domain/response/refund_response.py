@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from yandex_checkout.domain.common.response_object import ResponseObject
 from yandex_checkout.domain.models.amount import Amount
+from yandex_checkout.domain.models.refund_source import RefundSource
 
 
 class RefundResponse(ResponseObject):
@@ -17,6 +18,8 @@ class RefundResponse(ResponseObject):
     __receipt_registration = None
 
     __comment = None
+
+    __sources = None
 
     @property
     def id(self):
@@ -73,3 +76,14 @@ class RefundResponse(ResponseObject):
     @comment.setter
     def comment(self, value):
         self.__comment = value
+
+    @property
+    def sources(self):
+        return self.__sources
+
+    @sources.setter
+    def sources(self, value):
+        if isinstance(value, list):
+            self.__sources = [RefundSource(item) for item in value]
+        else:
+            self.__sources = value

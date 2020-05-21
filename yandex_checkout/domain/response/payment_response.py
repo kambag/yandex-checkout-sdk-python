@@ -6,6 +6,8 @@ from yandex_checkout.domain.models.cancellation_details import CancellationDetai
 from yandex_checkout.domain.models.confirmation.confirmation_factory import ConfirmationFactory
 from yandex_checkout.domain.models.payment_data.payment_data_factory import PaymentDataFactory
 from yandex_checkout.domain.models.recipient import Recipient
+from yandex_checkout.domain.models.requestor import RequestorFactory
+from yandex_checkout.domain.response.transfer_response import TransferResponse
 
 
 class PaymentResponse(ResponseObject):
@@ -19,6 +21,8 @@ class PaymentResponse(ResponseObject):
     __status = None
 
     __recipient = None
+
+    __requestor = None
 
     __amount = None
 
@@ -50,6 +54,10 @@ class PaymentResponse(ResponseObject):
 
     __authorization_details = None
 
+    __income_amount = None
+
+    __transfers = None
+
     @property
     def id(self):
         return self.__id
@@ -73,6 +81,14 @@ class PaymentResponse(ResponseObject):
     @recipient.setter
     def recipient(self, value):
         self.__recipient = Recipient(value)
+
+    @property
+    def requestor(self):
+        return self.__requestor
+
+    @requestor.setter
+    def requestor(self, value):
+        self.__requestor = RequestorFactory().create(value)
 
     @property
     def amount(self):
@@ -136,7 +152,7 @@ class PaymentResponse(ResponseObject):
 
     @refunded_amount.setter
     def refunded_amount(self, value):
-        self.__refunded_amount = value
+        self.__refunded_amount = Amount(value)
 
     @property
     def paid(self):
@@ -193,3 +209,24 @@ class PaymentResponse(ResponseObject):
     @authorization_details.setter
     def authorization_details(self, value):
         self.__authorization_details = AuthorizationDetails(value)
+
+    @property
+    def income_amount(self):
+        return self.__income_amount
+
+    @income_amount.setter
+    def income_amount(self, value):
+        self.__income_amount = Amount(value)
+
+    @property
+    def transfers(self):
+        return self.__transfers
+
+    @transfers.setter
+    def transfers(self, value):
+        if isinstance(value, list):
+            self.__transfers = [TransferResponse(item) for item in value]
+        elif value is None:
+            self.__transfers = value
+        else:
+            raise TypeError('Invalid transfers data type in payment_response.transfers')

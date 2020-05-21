@@ -1,56 +1,55 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from yandex_checkout import Currency
 from yandex_checkout.domain.common.payment_method_type import PaymentMethodType
+from yandex_checkout.domain.models.currency import Currency
 from yandex_checkout.domain.models.payment_data.card_type import CardType
 from yandex_checkout.domain.models.payment_data.request.credit_card import CreditCard as RequestCreditCard
 from yandex_checkout.domain.models.payment_data.request.payment_data_alfabank import \
     PaymentDataAlfabank as RequestPaymentDataAlfabank
 from yandex_checkout.domain.models.payment_data.request.payment_data_applepay import \
     PaymentDataApplepay as RequestPaymentDataApplepay
-from yandex_checkout.domain.models.payment_data.request.payment_data_google_pay import \
-    PaymentDataGooglePay as RequestPaymentDataGooglePay
-from yandex_checkout.domain.models.payment_data.request.payment_data_cash import \
-    PaymentDataCash as RequestPaymentDataCash
+from yandex_checkout.domain.models.payment_data.request.payment_data_b2b_sberbank import \
+    PaymentDataB2bSberbank as RequestPaymentDataB2bSberbank, VatDataType, VatDataRate
 from yandex_checkout.domain.models.payment_data.request.payment_data_bank_card import \
     PaymentDataBankCard as RequestPaymentDataBankCard
+from yandex_checkout.domain.models.payment_data.request.payment_data_cash import \
+    PaymentDataCash as RequestPaymentDataCash
+from yandex_checkout.domain.models.payment_data.request.payment_data_google_pay import \
+    PaymentDataGooglePay as RequestPaymentDataGooglePay
 from yandex_checkout.domain.models.payment_data.request.payment_data_installments import \
     PaymentDataInstallments as RequestPaymentDataInstallments
 from yandex_checkout.domain.models.payment_data.request.payment_data_mobile_balance import \
     PaymentDataMobileBalance as RequestPaymentDataMobileBalance
-from yandex_checkout.domain.models.payment_data.request.payment_data_sberbank import \
-    PaymentDataSberbank as RequestPaymentDataSberbank
-from yandex_checkout.domain.models.payment_data.request.payment_data_b2b_sberbank import \
-    PaymentDataB2bSberbank as RequestPaymentDataB2bSberbank, VatDataType, VatDataRate, VatData
 from yandex_checkout.domain.models.payment_data.request.payment_data_qiwi import \
     PaymentDataQiwi as RequestPaymentDataQiwi
+from yandex_checkout.domain.models.payment_data.request.payment_data_sberbank import \
+    PaymentDataSberbank as RequestPaymentDataSberbank
 from yandex_checkout.domain.models.payment_data.request.payment_data_wechat import \
     PaymentDataWechat as RequestPaymentDataWechat
-
 from yandex_checkout.domain.models.payment_data.response.credit_card import CreditCard as ResponseCreditCard
 from yandex_checkout.domain.models.payment_data.response.payment_data_alfabank import \
     PaymentDataAlfabank as ResponsePaymentDataAlfabank
 from yandex_checkout.domain.models.payment_data.response.payment_data_applepay import \
     PaymentDataApplepay as ResponsePaymentdataApplepay
-from yandex_checkout.domain.models.payment_data.response.payment_data_google_pay import \
-    PaymentDataGooglePay as ResponsePaymentDataGooglePay
-from yandex_checkout.domain.models.payment_data.response.payment_data_cash import \
-    PaymentDataCash as ResponsePaymentDataCash
-from yandex_checkout.domain.models.payment_data.response.payment_data_bank_card import \
-    PaymentDataBankCard as ResponsePaymentDataBankCard
-from yandex_checkout.domain.models.payment_data.response.payment_data_installments import \
-    PaymentDataInstallments as ResponcePaymentDataInstallments
-from yandex_checkout.domain.models.payment_data.response.payment_data_mobile_balance import \
-    PaymentDataMobileBalance as ResponsePaymentDataMobileBalance
-from yandex_checkout.domain.models.payment_data.response.payment_data_sberbank import \
-    PaymentDataSberbank as ResponsePaymentDataSberbank
 from yandex_checkout.domain.models.payment_data.response.payment_data_b2b_sberbank import \
     PaymentDataB2bSberbank as ResponsePaymentDataB2bSberbank
-from yandex_checkout.domain.models.payment_data.response.payment_data_qiwi import \
-    PaymentDataQiwi as ResponsePaymentDataQiwi
+from yandex_checkout.domain.models.payment_data.response.payment_data_bank_card import \
+    PaymentDataBankCard as ResponsePaymentDataBankCard
+from yandex_checkout.domain.models.payment_data.response.payment_data_cash import \
+    PaymentDataCash as ResponsePaymentDataCash
+from yandex_checkout.domain.models.payment_data.response.payment_data_google_pay import \
+    PaymentDataGooglePay as ResponsePaymentDataGooglePay
+from yandex_checkout.domain.models.payment_data.response.payment_data_installments import \
+    PaymentDataInstallments as ResponsePaymentDataInstallments
+from yandex_checkout.domain.models.payment_data.response.payment_data_mobile_balance import \
+    PaymentDataMobileBalance as ResponsePaymentDataMobileBalance
 from yandex_checkout.domain.models.payment_data.response.payment_data_psb import \
     PaymentDataPsb as ResponsePaymentDataPsb
+from yandex_checkout.domain.models.payment_data.response.payment_data_qiwi import \
+    PaymentDataQiwi as ResponsePaymentDataQiwi
+from yandex_checkout.domain.models.payment_data.response.payment_data_sberbank import \
+    PaymentDataSberbank as ResponsePaymentDataSberbank
 from yandex_checkout.domain.models.payment_data.response.payment_data_wechat import \
     PaymentDataWechat as ResponsePaymentDataWechat
 
@@ -303,7 +302,7 @@ class TestPaymentData(unittest.TestCase):
         payment_data = RequestPaymentDataInstallments()
         self.assertEqual({'type': PaymentMethodType.INSTALMENTS}, dict(payment_data))
 
-        payment_data = ResponcePaymentDataInstallments()
+        payment_data = ResponsePaymentDataInstallments()
         self.assertEqual({'type': PaymentMethodType.INSTALMENTS}, dict(payment_data))
 
     def test_psb_cast(self):
