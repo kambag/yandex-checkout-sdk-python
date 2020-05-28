@@ -12,5 +12,13 @@ class CardType:
     CUP = 'CUP'
     JCB = 'JCB'
     AMERICAN_EXPRESS = 'AmericanExpress'
-    UNKNOWN = 'Unknown'
     DINERS_CLUB = 'DinersClub'
+    UNKNOWN = 'Unknown'
+
+
+class CardSource:
+    """
+    Class representing enum of available sources of credit cards
+    """
+    APPLE_PAY = 'apple_pay'
+    GOOGLE_PAY = 'google_pay'
