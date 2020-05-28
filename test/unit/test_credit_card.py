@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from yandex_checkout.domain.models.payment_data.card_type import CardType
+from yandex_checkout.domain.models.payment_data.card_type import CardType, CardSource
 from yandex_checkout.domain.models.payment_data.request.credit_card import CreditCard as RequestCreditCard
 from yandex_checkout.domain.models.payment_data.response.credit_card import CreditCard as ResponseCreditCard
 
@@ -28,12 +28,18 @@ class TestCreditCard(unittest.TestCase):
         credit_card.expiry_year = '2010'
         credit_card.expiry_month = '02'
         credit_card.card_type = CardType.VISA
+        credit_card.issuer_country = 'RU'
+        credit_card.issuer_name = 'Sberbank'
+        credit_card.source = CardSource.APPLE_PAY
 
         self.assertEqual({
             'last4': '0000',
             'expiry_year': '2010',
             'expiry_month': '02',
-            'card_type': CardType.VISA
+            'card_type': CardType.VISA,
+            'issuer_country': 'RU',
+            'issuer_name': 'Sberbank',
+            'source': 'apple_pay'
         }, dict(credit_card))
 
     def test_credit_card_invalid_params(self):
@@ -64,3 +70,6 @@ class TestCreditCard(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             credit_card.expiry_month = 'invalid expiry_month'
+
+        with self.assertRaises(ValueError):
+            credit_card.issuer_country = 'invalid issuer_country'
