@@ -48,3 +48,8 @@ class CancellationDetailsReasonCode(object):
     PAYMENT_METHOD_LIMIT_EXCEEDED = 'payment_method_limit_exceeded'
     PAYMENT_METHOD_RESTRICTED = 'payment_method_restricted'
     PERMISSION_REVOKED = 'permission_revoked'
+    INTERNAL_TIMEOUT = 'internal_timeout'
+    CANCELED_BY_MERCHANT = 'canceled_by_merchant'
+    PAYMENT_EXPIRED = 'payment_expired'
+    EXPIRED_ON_CONFIRMATION = 'expired_on_confirmation'
+    EXPIRED_ON_CAPTURE = 'expired_on_capture'
