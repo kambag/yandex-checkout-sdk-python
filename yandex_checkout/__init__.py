@@ -35,6 +35,7 @@ from yandex_checkout.domain.response.payment_list_response import PaymentListRes
 from yandex_checkout.domain.response.payment_response import PaymentResponse
 from yandex_checkout.domain.response.receipt_item_response import ReceiptItemResponse
 from yandex_checkout.domain.response.receipt_response import ReceiptResponse
+from yandex_checkout.domain.response.refund_list_response import RefundListResponse
 from yandex_checkout.domain.response.refund_response import RefundResponse
 from yandex_checkout.domain.response.transfer_response import TransferResponse, TransferStatus
 from yandex_checkout.domain.response.webhook_response import WebhookResponse, WebhookList
@@ -44,4 +45,4 @@ from yandex_checkout.refund import Refund
 from yandex_checkout.settings import Settings
 from yandex_checkout.webhook import Webhook
 
-__version__ = '1.6.2'
+__version__ = '1.6.3'

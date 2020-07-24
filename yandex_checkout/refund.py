@@ -4,6 +4,7 @@ import uuid
 from yandex_checkout.client import ApiClient
 from yandex_checkout.domain.common.http_verb import HttpVerb
 from yandex_checkout.domain.request.refund_request import RefundRequest
+from yandex_checkout.domain.response.refund_list_response import RefundListResponse
 from yandex_checkout.domain.response.refund_response import RefundResponse
 
 
@@ -54,3 +55,11 @@ class Refund:
         path = instance.base_path + '/' + refund_id
         response = instance.client.request(HttpVerb.GET, path)
         return RefundResponse(response)
+
+    @classmethod
+    def list(cls, params):
+        instance = cls()
+        path = cls.base_path
+
+        response = instance.client.request(HttpVerb.GET, path, params)
+        return RefundListResponse(response)
