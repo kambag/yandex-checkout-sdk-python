@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from yandex_checkout.domain.common.response_object import ResponseObject
-from yandex_checkout.domain.response.receipt_response import ReceiptResponse
+from yandex_checkout.domain.response.refund_response import RefundResponse
 
 
-class ReceiptListResponse(ResponseObject):
+class RefundListResponse(ResponseObject):
 
     __type = None
 
-    __items = None
-
     __next_cursor = None
+
+    __items = None
 
     @property
     def type(self):
@@ -34,6 +34,6 @@ class ReceiptListResponse(ResponseObject):
     @items.setter
     def items(self, value):
         if isinstance(value, list):
-            self.__items = [ReceiptResponse(receipt) for receipt in value]
+            self.__items = [RefundResponse(refund) for refund in value]
         else:
             self.__items = value

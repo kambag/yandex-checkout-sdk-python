@@ -4,9 +4,10 @@ from yandex_checkout.domain.response.payment_response import PaymentResponse
 
 
 class PaymentListResponse(ResponseObject):
+
     __type = None
 
-    __next_page = None
+    __next_cursor = None
 
     __items = None
 
@@ -19,12 +20,12 @@ class PaymentListResponse(ResponseObject):
         self.__type = value
 
     @property
-    def next_page(self):
-        return self.__next_page
+    def next_cursor(self):
+        return self.__next_cursor
 
-    @next_page.setter
-    def next_page(self, value):
-        self.__next_page = value
+    @next_cursor.setter
+    def next_cursor(self, value):
+        self.__next_cursor = value
 
     @property
     def items(self):

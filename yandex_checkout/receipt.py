@@ -15,15 +15,20 @@ class Receipt:
         self.client = ApiClient()
 
     @classmethod
-    def list(cls, params):
-        if ('payment_id' in params or 'refund_id' in params) is False:
-            raise TypeError('Invalid params value')
+    def find_one(cls, receipt_id):
+        """
+        Get receipt information
 
+        :param receipt_id:
+        :return: ReceiptResponse
+        """
         instance = cls()
-        path = cls.base_path
+        if not isinstance(receipt_id, str) or not receipt_id:
+            raise ValueError('Invalid payment_id value')
 
-        response = instance.client.request(HttpVerb.GET, path, params)
-        return ReceiptListResponse(response)
+        path = instance.base_path + '/' + receipt_id
+        response = instance.client.request(HttpVerb.GET, path)
+        return ReceiptResponse(response)
 
     @classmethod
     def create(cls, params, idempotency_key=None):
@@ -53,3 +58,11 @@ class Receipt:
 
         response = instance.client.request(HttpVerb.POST, path, None, headers, params_object)
         return ReceiptResponse(response)
+
+    @classmethod
+    def list(cls, params):
+        instance = cls()
+        path = cls.base_path
+
+        response = instance.client.request(HttpVerb.GET, path, params)
+        return ReceiptListResponse(response)

@@ -64,9 +64,6 @@ class TestReceipt(unittest.TestCase):
             self.assertEqual(rec_list.type, "list")
             self.assertIsInstance(rec_list.items[0], ReceiptResponse)
 
-            with self.assertRaises(TypeError):
-                Receipt.list('invalid params')
-
     def test_create(self):
         self.maxDiff = None
         with patch('yandex_checkout.client.ApiClient.request') as request_mock:
