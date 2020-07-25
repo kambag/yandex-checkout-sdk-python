@@ -103,15 +103,15 @@ with open('yandex_checkout/__init__.py') as fp:
     version = re.search(r"__version__\s*=\s*'(.*)'", fp.read()).group(1)
 
 setup(
-    name="yandex-checkout",
+    name="yandex-checkout-no-uuid",
     version=version,
-    description="Yandex Checkout SDK Python Library",
+    description="Yandex Checkout SDK Python Library (NO UUID PACKAGE)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yandex-money/yandex-checkout-sdk-python",
+    url="https://github.com/kambag/yandex-checkout-sdk-python",
     author="Yandex.Money",
     packages=find_packages('.', ['test']),
-    install_requires=["requests", "uuid", "urllib3", 'distro'],
+    install_requires=["requests", "urllib3", 'distro'],
     zip_safe=False,
     license="MIT",
     classifiers=[
